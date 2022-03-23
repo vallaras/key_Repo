@@ -1,0 +1,25 @@
+
+
+a=55
+b=10
+sum=max(a,b)
+print(sum)
+
+c=-10
+d=-20
+sum=max(c,d)
+print(sum)
+
+
+def maximum(a,b):
+    if a >=b :
+        return a
+    else:
+        return b
+a=20
+b=40
+print(maximum(a,b))
+
+a=30
+b=40
+print(a if a>=b else b)
