@@ -22,4 +22,4 @@ print(maximum(a,b))
 
 a=30
 b=40
-print(a if a>=b else b)
+print(a if a>=b else  b)
