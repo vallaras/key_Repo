@@ -33,5 +33,34 @@ o=str.isascii()
 print(o)
 
 
+n=int(input("Enter the value:"))
+fact = 1
+while(n > 1):
+	fact=fact * n
+	n -= 1
+print(fact)
+
+
+def math(a):
+	count=1
+	for i in range(2,a+1):
+		a=i+1
+		count=count+i
+		print(a)
+
+
+l=math((10))
+print(l)
+
+def math(x):
+	sum=0
+	for i in range(0,x+1):
+		sum=sum+i*i*i
+	return sum
+x=int(input("Enter the value:"))
+
+print(math(x))
+
+
 
 
