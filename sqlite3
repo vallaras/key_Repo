@@ -1,0 +1,58 @@
+from flask import *
+import sqlite3
+
+app = Flask(__name__)
+@app.route("/")
+def index():
+    return render_template("index1.html");
+@app.route("/add")
+def add():
+    return render_template("addstudent.html")
+
+
+@app.route("/savedetails", methods=["POST", "GET"])
+def saveDetails():
+    msg = "msg"
+    if request.method == "POST":
+        try:
+            name = request.form["name"]
+            stu_m1= int(request.form["stu_m1"])
+            stu_m2 = int(request.form["stu_m2"])
+            stu_m3 = int(request.form["stu_m3"])
+            total = int(stu_m1)+int(stu_m2)+int(stu_m3)
+            avg=total/3
+            if total >=280:
+                grade="A"
+            else:
+                grade='C'
+            print(total,grade)
+            avg = int(total/3)
+            print(stu_m1,stu_m2,stu_m3,total,avg)
+            with sqlite3.connect("student1.db") as con:
+                cur = con.cursor()
+                cur.execute("INSERT into student1 (name,stu_m1,stu_m2,stu_m3,total,avg,grade) values (?,?,?,?,?,?,?)", (name,stu_m1,stu_m2,stu_m3,total,avg,grade))
+                con.commit()
+                msg = "student successfully Added"
+        except:
+            con.rollback()
+            msg = "We can not add the employee to the list"
+        finally:
+            return render_template("sucess.html", msg=msg)
+
+@app.route("/view")
+def view():
+    con = sqlite3.connect("student1.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("select * from student1")
+    rows = cur.fetchall()
+    print(rows)
+    return render_template("view.html", rows=rows)
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True,port=9900)
+
