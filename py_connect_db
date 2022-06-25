@@ -1,0 +1,14 @@
+import sqlite3
+
+con = sqlite3.connect("we_db.db")
+print("Database opened successfully")
+
+con.execute(
+    "create table toys (u_id INTEGER PRIMARY KEY AUTOINCREMENT, uname TEXT NOT NULL, contact INT)")
+
+print("Table created successfully")
+
+con.commit()
+con.close()
+
+
